@@ -7,9 +7,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-app.get('/', (req, res) => {
-  res.send('<h1>Socket.IO Express Server</h1>');
-});
+app.use(express.static('public/html'));
 
 io.on('connection', (socket) => {
   console.log('A user connected');
