@@ -1,28 +1,31 @@
+var socketio = require("socket.io");
+const express = require("express");
+const http = require("http");
+const path = require("path");
+const port = process.env.PORT || 8080;
 
-const express = require('express');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
 
 const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer);
 
-app.use(express.static('public/html'));
+var server = http.createServer(app);
+var io = socketio(server);
 
-io.on('connection', (socket) => {
-  console.log('A user connected');
+const publicDirectoryPath = path.join(__dirname, "./public");
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
+app.use(express.static(publicDirectoryPath));
+
+io.on("connection", (socket) => {
+  console.log("User connected");
+
+  socket.on("keyDownEvent", (key) => {
+    console.log(`Key ${key} was pressed`);
   });
 
-  socket.on('message', (msg) => {
-    console.log('Message:', msg);
-    io.emit('message', msg);
-  });
+  socket.on("keyUpEvent", (key) => {
+    console.log(`Key ${key} was released`);
+  })
+
 });
 
-const PORT = process.env.PORT || 5000;
-httpServer.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(port, "0.0.0.0");
+

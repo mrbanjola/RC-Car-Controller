@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RC Drift Cockpit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <h1>RC Drift Cockpit</h1>
+  <div class="status">
+    <span id="driveState">Drive: IDLE</span> | <span id="turnState">Turn: STRAIGHT</span>
+  </div>
+
+  <div class="dashboard">
+    <div class="panel gamepad">
+      <button class="btn" id="up">↑</button>
+      <button class="btn" id="left">←</button>
+      <button class="btn" id="stop">●</button>
+      <button class="btn" id="right">→</button>
+      <button class="btn" id="down">↓</button>
+    </div>
+
+      <div class="car-display">
+        <img src="/images/subaru-wrc.png" alt="Subaru WRC" class="wrc-car">
+      </div>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/scripts/script.js"></script>
+</body>
+</html>
